@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS livecampus_project_bdd_tamagotchi;
+
+USE livecampus_project_bdd_tamagotchi;
+
 CREATE TABLE Users(
    id INT AUTO_INCREMENT,
    login VARCHAR(50)  NOT NULL,
