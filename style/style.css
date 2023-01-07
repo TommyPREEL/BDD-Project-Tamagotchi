@@ -14,3 +14,60 @@
 a{
     text-decoration: none;
 }
+
+:root {
+    --success: #00b894;
+    --progress: #e17055;
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  h1 {
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+  }
+  
+  .container {
+    max-width: 720px;
+    margin: 0px auto;
+    width: 100%;
+  }
+  
+  .text-center { text-align:center; }
+  
+  .progressbar-wrapper {
+    background-color: #dfe6e9;
+    color: white;
+    border-radius: 15px;
+    width: 100%;
+  }
+  
+  .progressbar {
+    background-color: var(--progress);
+    color: white;
+    padding: 1rem;
+    text-align: right;
+    font-size: 20px;
+    border-radius: 15px;
+  }
+  
+  .progressbar[title="downloading"] {
+     background-color: var(--progress);
+  }
+  
+  .progressbar[title="downloaded"] {
+     background-color: var(--success);
+  }
+    
+  .mp4 {
+    width: 100%;
+  }
+  
+  .mp3 {
+    width: 60%;
+  }

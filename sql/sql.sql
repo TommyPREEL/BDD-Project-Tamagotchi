@@ -12,7 +12,7 @@ CREATE TABLE Users(
 CREATE TABLE Tamagotchis(
    id_1 INT,
    id INT AUTO_INCREMENT,
-   nom VARCHAR(50)  NOT NULL,
+   name VARCHAR(50)  NOT NULL,
    hungry TINYINT NOT NULL,
    thirsty TINYINT NOT NULL,
    sleep TINYINT NOT NULL,

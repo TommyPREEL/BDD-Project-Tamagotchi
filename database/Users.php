@@ -46,4 +46,16 @@ class Users extends Database
         }
 
     }
+
+    public static function getUserIdByUsername(string $username)
+    {
+        $pdo = self::getDatabase();
+        $sql = "SELECT %s FROM %s WHERE %s = :login";
+
+        $stmt = $pdo->prepare(sprintf($sql, static::$columns[0], static::$table, static::$columns[1]));
+        $stmt->bindValue("login", $username);
+        $stmt->execute();
+        // $stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
+        return $stmt->fetch();
+    }
 }
