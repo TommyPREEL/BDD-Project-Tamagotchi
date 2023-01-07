@@ -22,7 +22,7 @@ foreach($tamagotchis as $tamagotchi)
         </a>
       </div>
       <div class="card-body">
-        <h5 class="card-title font-weight-bold"><a><?php echo $tamagotchi['name']?></a></h5>
+        <h5 class="card-title font-weight-bold"><a><?php echo $tamagotchi['name']." (lv.".$tamagotchi['level'].")"?></a></h5>
         <h6><a>Hungry</a></h6>
         <div class="w3-light-grey">
           <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["hungry"]?>%"><?= $tamagotchi["hungry"]?>%</div>
