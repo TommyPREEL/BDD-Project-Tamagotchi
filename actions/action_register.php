@@ -7,6 +7,8 @@ if(Users::createAccount($_POST["username"]))
 {
     header('Location: ../index.php');
     exit();
+}else
+{
+    header('Location: ../views/register.php');
+    exit();
 }
-
-echo "create ok";

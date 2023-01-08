@@ -1,65 +1,66 @@
 <?php
 session_start();
 require_once "../database/Tamagotchis.php";
+include 'header.php';
 
 $tamagotchis = Tamagotchis::getAllByUserId($_SESSION["user_id"]);
+?>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link href="../style/style.css" rel="stylesheet">
+
+<a href="tamagotchi_create.php">
+  <button type="button" class="btn btn-outline-success d-flex justify-content-center create-tamagotchi">Create a new Tamagotchi ! <span class="material-symbols-outlined">pets</span></button>
+</a>
+
+<?php
+if($tamagotchis == null){
+  header("Location: tamagotchi_create.php");
+  exit();
+}else{
+?>
+<div class="d-flex flex-wrap align-items-start">
+<?php
 foreach($tamagotchis as $tamagotchi)
 {
 
 
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link href="../style/style.css" rel="stylesheet">
-<div class="container">
-  <section class="mx-auto my-5" style="max-width: 23rem;">
-      
-    <div class="card">
-      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-        <img src="../media/baby_yoda.png" class="img-fluid" />
-        <a href="#!">
-          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-        </a>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title font-weight-bold"><a><?php echo $tamagotchi['name']." (lv.".$tamagotchi['level'].")"?></a></h5>
-        <h6><a>Hungry</a></h6>
-        <div class="w3-light-grey">
-          <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["hungry"]?>%"><?= $tamagotchi["hungry"]?>%</div>
+
+  <div class="container">
+    <section class="mx-auto my-5">
+      <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['id'];?>" >
+        <div class="card">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="../media/baby_yoda.png" class="img-fluid" />
+              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title font-weight-bold d-flex justify-content-center"><?php echo $tamagotchi['name']." (lv.".$tamagotchi['level'].")"?></h4>
+              <h6><a>Hungry</a></h6>
+              <div class="w3-light-grey">
+                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["hungry"]?>%"><?= $tamagotchi["hungry"]?>%</div>
+              </div>
+              <h6><a>Thirsty</a></h6>
+              <div class="w3-light-grey">
+                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["thirsty"]?>%"><?= $tamagotchi["thirsty"]?>%</div>
+              </div>
+              <h6><a>Sleep</a></h6>
+              <div class="w3-light-grey">
+                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["sleep"]?>%"><?= $tamagotchi["sleep"]?>%</div>
+              </div>
+              <h6><a>Boredom</a></h6>
+              <div class="w3-light-grey">
+                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["boredom"]?>%"><?= $tamagotchi["boredom"]?>%</div>
+              </div>
+            </div>
         </div>
-        <h6><a>Thirsty</a></h6>
-        <div class="w3-light-grey">
-          <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["thirsty"]?>%"><?= $tamagotchi["thirsty"]?>%</div>
-        </div>
-        <h6><a>Sleep</a></h6>
-        <div class="w3-light-grey">
-          <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["sleep"]?>%"><?= $tamagotchi["sleep"]?>%</div>
-        </div>
-        <h6><a>Boredom</a></h6>
-        <div class="w3-light-grey">
-          <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["boredom"]?>%"><?= $tamagotchi["boredom"]?>%</div>
-        </div>
-        <p class="lead"><strong>Tonight's availability</strong></p>
-        <ul class="list-unstyled list-inline d-flex justify-content-between">
-          <li class="list-inline-item me-0">
-            <div class="chip me-0">5:30PM</div>
-          </li>
-          <li class="list-inline-item me-0">
-            <div class="chip bg-secondary text-white me-0">7:30PM</div>
-          </li>
-          <li class="list-inline-item me-0">
-            <div class="chip me-0">8:00PM</div>
-          </li>
-          <li class="list-inline-item me-0">
-            <div class="chip me-0">9:00PM</div>
-          </li>
-        </ul>
-        <a href="#!" class="btn btn-link link-secondary p-md-1 mb-0">Button</a>
-      </div>
-    </div>
-    
-  </section>
-</div>
+      </a>
+    </section>
+  </div>
+
 
 
 
@@ -67,48 +68,10 @@ foreach($tamagotchis as $tamagotchi)
 
 
 <?php
-}
+}}
 ?>
 
-
-<div class="container">
-  <p>Hungry</p>
-  <div class="progressbar-wrapper">
-    <div title="downloaded" class="progressbar mp4"><?php $tamagotchi["hungry"]?>
-    </div>
-  </div>
-
-  <p>Thirsty</p>
-  <div class="progressbar-wrapper">
-    <div title="downloaded" class="progressbar mp4">100%
-    </div>
-  </div>
-
-  <p>Hungry</p>
-  <div class="progressbar-wrapper">
-    <div title="downloaded" class="progressbar mp4">100%
-    </div>
-  </div>
-
-  <p>Hungry</p>
-  <div class="progressbar-wrapper">
-    <div title="downloaded" class="progressbar mp4">100%
-    </div>
-  </div>
-​
-     
 </div>
-
-<p>musique.mp3</p>
-     <div class="progressbar-wrapper">
-      <div title="downloading" class="progressbar mp3">60%</div>
-     </div>
-
-
-
-
-
-     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
 <div class="w3-light-grey">

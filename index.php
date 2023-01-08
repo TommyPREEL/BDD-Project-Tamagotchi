@@ -10,7 +10,7 @@
   </head>
 
 <body>
-  <div class="container">
+  <div class="container-form">
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <h2 class="text-center text-dark mt-5">Login</h2>
