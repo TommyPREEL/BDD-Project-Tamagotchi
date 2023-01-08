@@ -24,11 +24,7 @@ if($tamagotchis == null){
 <?php
 foreach($tamagotchis as $tamagotchi)
 {
-
-
 ?>
-
-
   <div class="container">
     <section class="mx-auto my-5">
       <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['id'];?>" >
@@ -61,31 +57,9 @@ foreach($tamagotchis as $tamagotchi)
     </section>
   </div>
 
-
-
-
-
-
-
 <?php
 }}
 ?>
-
-</div>
-
-
-<div class="w3-light-grey">
-  <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchis[0]["hungry"]?>%"><?= $tamagotchis[0]["hungry"]?>%</div>
-</div>
-<br>
-
-
-
-
-
-
-
-<button class="w3-button w3-green" onclick="move()">Click Me</button> 
 
 </div>
 

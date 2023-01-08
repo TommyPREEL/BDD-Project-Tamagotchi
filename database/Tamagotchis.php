@@ -87,25 +87,40 @@ class Tamagotchis extends Database
         }
     }
 
-    // public static function checkDeath(int $id_user, int $id_tamagotchi)
-    // {
-    //     $tamagotchi = self::getAllByTamagotchiId($id_user, $id_tamagotchi);
-    //     if($tamagotchi[self::$columns[3]] == 0 || $tamagotchi[self::$columns[4]] == 0 || $tamagotchi[self::$columns[5]] == 0 || $tamagotchi[self::$columns[6]] == 0)
-    //     {
-    //         $pdo = self::getDatabase();
-    //         $sql = "UPDATE %s set %s = :dead_date, WHERE %s = :id_user AND %s = :id_tamagotchi";
-    //         $stmt = $pdo->prepare(sprintf($sql, static::$table, static::$columns[10], static::$columns[11]));
-    //         $stmt->bindValue(":dead_date", $tamagotchi['level']+1, PDO::PARAM_INT);
-    //         $stmt->bindValue("id_user", $id_user, PDO::PARAM_INT);
-    //         $stmt->bindValue("id_tamagotchi", $id_tamagotchi, PDO::PARAM_INT);
-    //         $stmt->execute();
-    //         //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
-    //         return true;
-    //     }else
-    //     {
-    //         return false;
-    //     }
-    // }
+    public static function checkDeath(int $id_user, int $id_tamagotchi) 
+    {
+        $tamagotchi = self::getAllByTamagotchiId($id_user, $id_tamagotchi);
+        if($tamagotchi[self::$columns[3]] == 0 || $tamagotchi[self::$columns[4]] == 0 || $tamagotchi[self::$columns[5]] == 0 || $tamagotchi[self::$columns[6]] == 0)
+        {
+            $death_reason = null;
+            if($tamagotchi[self::$columns[3]] == 0)
+            {
+                $death_reason = self::$columns[3];
+            }else if($tamagotchi[self::$columns[4]] == 0)
+            {
+                $death_reason = self::$columns[4];
+            }else if($tamagotchi[self::$columns[5]] == 0)
+            {
+                $death_reason = self::$columns[5];
+            }else if($tamagotchi[self::$columns[6]] == 0)
+            {
+                $death_reason = self::$columns[6];
+            }
+            $pdo = self::getDatabase();
+            $sql = "UPDATE %s set %s = :dead_date, %s = :death_reason WHERE %s = :id_user AND %s = :id_tamagotchi";
+            $stmt = $pdo->prepare(sprintf($sql, static::$table, static::$columns[10], static::$columns[11], static::$columns[0], static::$columns[1]));
+            $stmt->bindValue(":dead_date", date("Y-m-d H:i:s"), PDO::PARAM_STR);
+            $stmt->bindValue(":death_reason", $death_reason, PDO::PARAM_STR);
+            $stmt->bindValue("id_user", $id_user, PDO::PARAM_INT);
+            $stmt->bindValue("id_tamagotchi", $id_tamagotchi, PDO::PARAM_INT);
+            $stmt->execute();
+            //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
 
     public static function getAllByTamagotchiId(int $id_user, int $id_tamagotchi)
     {

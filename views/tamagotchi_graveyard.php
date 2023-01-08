@@ -15,11 +15,7 @@ $tamagotchis = Tamagotchis::getAllDead($_SESSION["user_id"]);
 <?php
 foreach($tamagotchis as $tamagotchi)
 {
-
-
 ?>
-
-
   <div class="container">
     <section class="mx-auto my-5">
         <div class="card">
@@ -38,15 +34,7 @@ foreach($tamagotchis as $tamagotchi)
         </div>
     </section>
   </div>
-
-
-
-
-
-
-
 <?php
 }
 ?>
-
 </div>
