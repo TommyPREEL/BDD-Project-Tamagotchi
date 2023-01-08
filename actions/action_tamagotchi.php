@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../database/Tamagotchis.php';
+require_once(dirname (__FILE__) . '\..\assets\classes\Tamagotchis.php');
 
 switch($_GET["action"])
 {

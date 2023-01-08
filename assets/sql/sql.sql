@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS tamagotchis
 (
   id_users      TINYINT UNSIGNED,
   id            TINYINT UNSIGNED AUTO_INCREMENT,
-  nom           VARCHAR(50) NOT NULL,
+  name           VARCHAR(50) NOT NULL,
   hungry        TINYINT     NOT NULL DEFAULT 70,
   thirsty       TINYINT     NOT NULL DEFAULT 70,
   sleep         TINYINT     NOT NULL DEFAULT 70,

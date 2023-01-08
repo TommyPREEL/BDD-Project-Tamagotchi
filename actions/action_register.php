@@ -1,7 +1,5 @@
 <?php
-require_once '../database/Database.php';
-require_once '../database/Users.php';
-
+require_once(dirname (__FILE__) . '\..\assets\classes\Users.php');
 
 if(Users::createAccount($_POST["username"]))
 {
