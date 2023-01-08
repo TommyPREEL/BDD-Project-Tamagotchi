@@ -1,5 +1,3 @@
-DELIMITER //
-
 CREATE PROCEDURE update_tamagotchi_stats(IN tamagotchi_id TINYINT UNSIGNED,
                                          IN new_hungry TINYINT,
                                          IN new_thirsty TINYINT,
@@ -25,4 +23,4 @@ BEGIN
       boredom = db_current_boredom + new_boredom,
       nb_action = db_current_action + 1
   WHERE id = tamagotchi_id;
-END //
+END;
