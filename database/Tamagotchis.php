@@ -5,7 +5,7 @@ require_once 'Database.php';
 class Tamagotchis extends Database
 {
     protected static string $table = "tamagotchis";
-    protected static array $columns = ["id_1", "id", "name", "hungry", "thirsty", "sleep", "boredom", "level", "nb_action", "creation_date", "dead_date", "death_reason"];
+    protected static array $columns = ["id_users", "id", "name", "hungry", "thirsty", "sleep", "boredom", "level", "nb_action", "creation_date", "dead_date", "death_reason"];
 
     public static function create(int $id_user, string $name)
     {
@@ -23,7 +23,7 @@ class Tamagotchis extends Database
 
         $stmt = $pdo->prepare(sprintf($sql,
             static::$table,
-            static::$columns[0], // id_1
+            static::$columns[0], // id_users
             static::$columns[2], // name
             static::$columns[3], // hungry
             static::$columns[4], // thirsty

@@ -5,7 +5,7 @@ require_once 'Database.php';
 class Users extends Database
 {
     protected static string $table = "users";
-    protected static array $columns = ["id", "login"];
+    protected static array $columns = ["id", "username"];
 
     public static function connect(string $username)
     {
