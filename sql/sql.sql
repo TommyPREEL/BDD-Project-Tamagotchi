@@ -2,26 +2,28 @@ CREATE DATABASE IF NOT EXISTS livecampus_project_bdd_tamagotchi;
 
 USE livecampus_project_bdd_tamagotchi;
 
-CREATE TABLE Users(
-   id INT AUTO_INCREMENT,
-   login VARCHAR(50)  NOT NULL,
-   PRIMARY KEY(id),
-   UNIQUE(login)
+CREATE TABLE IF NOT EXISTS users
+(
+  id       TINYINT UNSIGNED AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE (username)
 );
 
-CREATE TABLE Tamagotchis(
-   id_1 INT,
-   id INT AUTO_INCREMENT,
-   name VARCHAR(50)  NOT NULL,
-   hungry TINYINT NOT NULL,
-   thirsty TINYINT NOT NULL,
-   sleep TINYINT NOT NULL,
-   boredom TINYINT NOT NULL,
-   level TINYINT NOT NULL,
-   nb_action TINYINT NOT NULL,
-   creation_date DATETIME NOT NULL,
-   dead_date DATETIME,
-   death_reason VARCHAR(50) ,
-   PRIMARY KEY(id_1, id),
-   FOREIGN KEY(id_1) REFERENCES Users(id)
+CREATE TABLE IF NOT EXISTS tamagotchis
+(
+  id_users      TINYINT UNSIGNED,
+  id            TINYINT UNSIGNED AUTO_INCREMENT,
+  nom           VARCHAR(50) NOT NULL,
+  hungry        TINYINT     NOT NULL DEFAULT 70,
+  thirsty       TINYINT     NOT NULL DEFAULT 70,
+  sleep         TINYINT     NOT NULL DEFAULT 70,
+  boredom       TINYINT     NOT NULL DEFAULT 70,
+  level         TINYINT     NOT NULL DEFAULT 1,
+  nb_action     TINYINT     NOT NULL DEFAULT 0,
+  creation_date DATETIME    NOT NULL DEFAULT NOW(),
+  dead_date     DATETIME,
+  death_reason  VARCHAR(50),
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_users) REFERENCES users (id)
 );
