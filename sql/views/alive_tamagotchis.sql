@@ -1,5 +1,5 @@
 -- Creation view to see all interesting column for the PHP backend
-CREATE VIEW user_tamagotchis AS
+CREATE VIEW alive_tamagotchis AS
 SELECT username,
        nom,
        hungry,
