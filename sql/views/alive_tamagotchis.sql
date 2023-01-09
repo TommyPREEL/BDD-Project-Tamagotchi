@@ -1,12 +1,13 @@
 -- Creation view to see all interesting column for the PHP backend
 CREATE VIEW alive_tamagotchis AS
 SELECT username,
-       nom,
+       name,
        hungry,
-       thirsty,
+       drink,
        sleep,
-       boredom,
-       level
+       boredom
+-- TODO : AJOUTER L'AFFICHAGE DU LEVEL DU TAMAGOTCHI
 FROM tamagotchis
-       JOIN users u on u.id = tamagotchis.id_users
-WHERE dead_date IS NULL;
+       JOIN users on users.id = tamagotchis.id_users
+       LEFT JOIN deaths on tamagotchis.id = deaths.id_tamagotchis
+WHERE is_alive(tamagotchis.id) IS TRUE;
