@@ -5,8 +5,8 @@ SELECT username,
        hungry,
        drink,
        sleep,
-       boredom
--- TODO : AJOUTER L'AFFICHAGE DU LEVEL DU TAMAGOTCHI
+       boredom,
+       get_level(tamagotchis.id) as level
 FROM tamagotchis
        JOIN users on users.id = tamagotchis.id_users
        LEFT JOIN deaths on tamagotchis.id = deaths.id_tamagotchis
