@@ -15,6 +15,11 @@ BEGIN
   WHERE id = tamagotchi_id
   LIMIT 1;
 
+  IF db_current_hungry = 0 OR db_current_boredom = 0 OR db_current_sleep = 0 OR db_current_drink = 0 THEN
+    SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT =
+        'Bad Request, The current tamagotchi already have a stats to 0 (already dead)';
+  END IF;
+
   SET db_current_hungry = db_current_hungry + new_hungry;
   SET db_current_drink = db_current_drink + new_drink;
   SET db_current_sleep = db_current_sleep + new_sleep;
