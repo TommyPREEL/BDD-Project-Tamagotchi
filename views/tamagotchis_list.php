@@ -3,7 +3,8 @@ session_start();
 require_once("../assets/include/head.php");
 require_once("../assets/classes/Tamagotchis.php");
 
-$tamagotchis = Tamagotchis::getAllByUserId($_SESSION["user_id"]);
+$tamagotchis = AliveTamagotchis::getAllByUserId($_SESSION["user_id"]);
+var_dump($tamagotchis);die('list ligne 7');
 ?>
 
 <a href="tamagotchi_create.php">
@@ -19,7 +20,7 @@ if($tamagotchis == null){
   <?php foreach($tamagotchis as $tamagotchi) { ?>
   <div class="container">
     <section class="mx-auto my-5">
-      <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['id'];?>" >
+      <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['user_id'];?>" >
         <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               <img src="../assets/media/baby_yoda.png" class="img-fluid" />
@@ -33,7 +34,7 @@ if($tamagotchis == null){
               </div>
               <h6><a>Thirsty</a></h6>
               <div class="w3-light-grey">
-                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["thirsty"]?>%"><?= $tamagotchi["thirsty"]?>%</div>
+                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["drink"]?>%"><?= $tamagotchi["drink"]?>%</div>
               </div>
               <h6><a>Sleep</a></h6>
               <div class="w3-light-grey">

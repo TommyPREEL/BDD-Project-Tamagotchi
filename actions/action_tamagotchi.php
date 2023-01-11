@@ -33,7 +33,6 @@ switch($_GET["action"])
         break;
     }
 }
-Tamagotchis::checkLevel($_SESSION["user_id"], $_SESSION["tamagotchi_id"]);
-Tamagotchis::checkDeath($_SESSION["user_id"], $_SESSION["tamagotchi_id"]);
+
 header('Location: ../views/tamagotchi_profil.php?tamagotchi_id='.$_SESSION["tamagotchi_id"]);
 exit();
