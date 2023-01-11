@@ -14,7 +14,7 @@ BEGIN
   SELECT hungry, drink, sleep, boredom
   INTO db_current_hungry, db_current_drink, db_current_sleep, db_current_boredom
   FROM tamagotchis
-  JOIN historical_actions ha on tamagotchis.id = ha.id_tamagotchis
+         JOIN historical_actions ha on tamagotchis.id = ha.id_tamagotchis
   WHERE tamagotchis.id = tamagotchi_id
   ORDER BY ha.creation_date DESC
   LIMIT 1;
@@ -24,10 +24,17 @@ BEGIN
         'Bad Request, The current tamagotchi already have a stats to 0 (already dead)';
   END IF;
 
-  SET db_current_hungry = db_current_hungry + new_hungry;
-  SET db_current_drink = db_current_drink + new_drink;
-  SET db_current_sleep = db_current_sleep + new_sleep;
-  SET db_current_boredom = db_current_boredom + new_boredom;
+  -- If the update of the statistic gives a result lower than 0, then we force its value to 0
+  SET db_current_hungry = if(db_current_hungry + new_hungry < 0, 0, db_current_hungry + new_hungry);
+  SET db_current_drink = if(db_current_drink + new_drink < 0, 0, db_current_drink + new_drink);
+  SET db_current_sleep = if(db_current_sleep + new_sleep < 0, 0, db_current_sleep + new_sleep);
+  SET db_current_boredom = if(db_current_boredom + new_boredom < 0, 0, db_current_boredom + new_boredom);
+
+  -- If the update of the statistic gives a result greater than 100, then we force its value to 100
+  SET db_current_hungry = if(db_current_hungry > 100, 100, db_current_hungry);
+  SET db_current_drink = if(db_current_drink > 100, 100, db_current_drink);
+  SET db_current_sleep = if(db_current_sleep > 100, 100, db_current_sleep);
+  SET db_current_boredom = if(db_current_boredom > 100, 100, db_current_boredom);
 
   INSERT INTO historical_actions (id_tamagotchis, hungry, drink, sleep, boredom, action_type)
     VALUE
