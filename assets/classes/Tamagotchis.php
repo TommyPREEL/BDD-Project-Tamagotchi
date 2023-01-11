@@ -63,7 +63,6 @@ class Tamagotchis extends Database
         $stmt = $pdo->prepare(sprintf($sql, static::$table, static::$columns[0], static::$columns[10]));
         $stmt->bindValue("id_user", $id_user);
         $stmt->execute();
-        //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
         return $stmt->fetchAll();
     }
 
@@ -79,7 +78,6 @@ class Tamagotchis extends Database
             $stmt->bindValue("id_user", $id_user, PDO::PARAM_INT);
             $stmt->bindValue("id_tamagotchi", $id_tamagotchi, PDO::PARAM_INT);
             $stmt->execute();
-            //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
             return true;
         }else
         {
@@ -114,7 +112,6 @@ class Tamagotchis extends Database
             $stmt->bindValue("id_user", $id_user, PDO::PARAM_INT);
             $stmt->bindValue("id_tamagotchi", $id_tamagotchi, PDO::PARAM_INT);
             $stmt->execute();
-            //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
             return true;
         }else
         {
@@ -131,7 +128,6 @@ class Tamagotchis extends Database
         $stmt->bindValue("id_user", $id_user);
         $stmt->bindValue("id_tamagotchi", $id_tamagotchi);
         $stmt->execute();
-        //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
         return $stmt->fetch();
     }
 
@@ -143,7 +139,6 @@ class Tamagotchis extends Database
         $stmt = $pdo->prepare(sprintf($sql, static::$table, static::$columns[0], static::$columns[10]));
         $stmt->bindValue("id_user", $id_user);
         $stmt->execute();
-        //$stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
         return $stmt->fetchAll();
     }
 

@@ -1,14 +1,10 @@
 <?php
 session_start();
-require_once "../database/Tamagotchis.php";
-include 'header.php';
+require_once("../assets/include/head.php");
+require_once("../assets/classes/Tamagotchis.php");
 
 $tamagotchis = Tamagotchis::getAllByUserId($_SESSION["user_id"]);
 ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link href="../style/style.css" rel="stylesheet">
 
 <a href="tamagotchi_create.php">
   <button type="button" class="btn btn-outline-success d-flex justify-content-center create-tamagotchi">Create a new Tamagotchi ! <span class="material-symbols-outlined">pets</span></button>
@@ -18,19 +14,15 @@ $tamagotchis = Tamagotchis::getAllByUserId($_SESSION["user_id"]);
 if($tamagotchis == null){
   header("Location: tamagotchi_create.php");
   exit();
-}else{
-?>
+}else{ ?>
 <div class="d-flex flex-wrap align-items-start">
-<?php
-foreach($tamagotchis as $tamagotchi)
-{
-?>
+  <?php foreach($tamagotchis as $tamagotchi) { ?>
   <div class="container">
     <section class="mx-auto my-5">
       <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['id'];?>" >
         <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="../media/baby_yoda.png" class="img-fluid" />
+              <img src="../assets/media/baby_yoda.png" class="img-fluid" />
               <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
             </div>
             <div class="card-body">
@@ -56,11 +48,7 @@ foreach($tamagotchis as $tamagotchi)
       </a>
     </section>
   </div>
-
-<?php
-}}
-?>
-
+  <?php }} ?>
 </div>
 
 <script>

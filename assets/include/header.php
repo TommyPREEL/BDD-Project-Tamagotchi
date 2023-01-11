@@ -1,8 +1,10 @@
+
+<?php if (isset($_SESSION["user_id"])) { ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light nav-bar">
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link" href="../views/tamagotchis_list.php"><img class="img-tamagotchi" src="../media/tamagotchi.png"/></a>
+                <a class="nav-link" href="../views/tamagotchis_list.php"><img class="img-tamagotchi" src="../assets/media/tamagotchi.png"/></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../views/tamagotchis_list.php">Tamagotchis List</a>
@@ -16,3 +18,4 @@
         </ul>
     </div>
 </nav>
+<?php } ?>

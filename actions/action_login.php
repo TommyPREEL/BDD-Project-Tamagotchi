@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once '../database/Database.php';
-require_once '../database/Users.php';
+require_once(dirname (__FILE__) . '\..\assets\classes\Users.php');
 
 if(Users::connect($_POST["username"]))
 {
@@ -10,6 +9,7 @@ if(Users::connect($_POST["username"]))
     exit();
 }else
 {
+    $_SESSION["user_id"] = null;
     header('Location: ../index.php');
     exit();
 }
