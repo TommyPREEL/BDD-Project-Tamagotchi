@@ -21,4 +21,4 @@
       </div>
     </div>
   </div>
-<?php require("../assets/include/footer.php"); ?>
+<?php require("./assets/include/footer.php"); ?>
