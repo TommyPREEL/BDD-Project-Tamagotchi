@@ -1,7 +1,7 @@
 DELIMITER //
 CREATE TRIGGER after_update_tamagotchi_stats
   AFTER UPDATE
-  ON tamagotchis
+  ON historical_actions
   FOR EACH ROW
 BEGIN
   IF NEW.hungry = 0 THEN

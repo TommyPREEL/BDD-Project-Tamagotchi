@@ -15,10 +15,6 @@ CREATE TABLE IF NOT EXISTS tamagotchis
   id_users      TINYINT UNSIGNED,
   id            TINYINT UNSIGNED AUTO_INCREMENT,
   name          VARCHAR(50) NOT NULL,
-  hungry        TINYINT     NOT NULL DEFAULT 70,
-  drink         TINYINT     NOT NULL DEFAULT 70,
-  sleep         TINYINT     NOT NULL DEFAULT 70,
-  boredom       TINYINT     NOT NULL DEFAULT 70,
   creation_date DATETIME    NOT NULL DEFAULT NOW(),
   PRIMARY KEY (id),
   FOREIGN KEY (id_users) REFERENCES users (id)
@@ -46,14 +42,14 @@ CREATE TABLE IF NOT EXISTS deaths
 
 CREATE TABLE IF NOT EXISTS historical_actions
 (
-  id_tamagotchis TINYINT UNSIGNED                       NOT NULL,
-  id             TINYINT UNSIGNED AUTO_INCREMENT        NOT NULL,
-  hungry         TINYINT                                NOT NULL,
-  drink          TINYINT                                NOT NULL,
-  sleep          TINYINT                                NOT NULL,
-  boredom        TINYINT                                NOT NULL,
-  action_type    ENUM ('eat', 'drink', 'sleep', 'play') NOT NULL,
-  creation_date  DATETIME                               NOT NULL DEFAULT NOW(),
+  id_tamagotchis TINYINT UNSIGNED                                     NOT NULL,
+  id             TINYINT UNSIGNED AUTO_INCREMENT                      NOT NULL,
+  hungry         TINYINT                                              NOT NULL,
+  drink          TINYINT                                              NOT NULL,
+  sleep          TINYINT                                              NOT NULL,
+  boredom        TINYINT                                              NOT NULL,
+  action_type    ENUM ('eat', 'drink', 'sleep', 'play', 'created') NOT NULL,
+  creation_date  DATETIME                                             NOT NULL DEFAULT NOW(),
   PRIMARY KEY (id),
   FOREIGN KEY (id_tamagotchis) REFERENCES tamagotchis (id)
 );

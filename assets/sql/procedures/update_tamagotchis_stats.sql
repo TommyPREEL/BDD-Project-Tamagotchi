@@ -14,7 +14,9 @@ BEGIN
   SELECT hungry, drink, sleep, boredom
   INTO db_current_hungry, db_current_drink, db_current_sleep, db_current_boredom
   FROM tamagotchis
-  WHERE id = tamagotchi_id
+  JOIN historical_actions ha on tamagotchis.id = ha.id_tamagotchis
+  WHERE tamagotchis.id = tamagotchi_id
+  ORDER BY ha.creation_date DESC
   LIMIT 1;
 
   IF db_current_hungry = 0 OR db_current_boredom = 0 OR db_current_sleep = 0 OR db_current_drink = 0 THEN
@@ -26,13 +28,6 @@ BEGIN
   SET db_current_drink = db_current_drink + new_drink;
   SET db_current_sleep = db_current_sleep + new_sleep;
   SET db_current_boredom = db_current_boredom + new_boredom;
-
-  UPDATE tamagotchis
-  SET hungry  = if(db_current_hungry > 100, 100, if(db_current_hungry < 0, 0, db_current_hungry)),
-      drink   = if(db_current_drink > 100, 100, if(db_current_drink < 0, 0, db_current_drink)),
-      sleep   = if(db_current_sleep > 100, 100, if(db_current_sleep < 0, 0, db_current_sleep)),
-      boredom = if(db_current_boredom > 100, 100, if(db_current_boredom < 0, 0, db_current_boredom))
-  WHERE id = tamagotchi_id;
 
   INSERT INTO historical_actions (id_tamagotchis, hungry, drink, sleep, boredom, action_type)
     VALUE
