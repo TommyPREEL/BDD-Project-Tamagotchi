@@ -1,3 +1,4 @@
+DELIMITER //
 CREATE TRIGGER after_update_tamagotchi_stats
   AFTER UPDATE
   ON tamagotchis
@@ -15,4 +16,4 @@ BEGIN
   ELSEIF NEW.boredom = 0 THEN
     CALL set_death(NEW.id, 'Death of Boredom');
   END IF;
-END;
+END//

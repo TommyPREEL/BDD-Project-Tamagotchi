@@ -1,3 +1,4 @@
+DELIMITER //
 CREATE TRIGGER after_action_tamagotchi_stats
   AFTER INSERT
   ON actions
@@ -16,4 +17,4 @@ BEGIN
     CALL update_tamagotchi_stats(NEW.id_tamagotchis, -5, -5, -5, 15);
   END IF;
 
-END;
+END//

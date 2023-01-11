@@ -8,6 +8,4 @@ BEGIN
   IF db_user_account IS NULL THEN
     SIGNAL SQLSTATE '40001' SET MESSAGE_TEXT = 'User account not exist';
   END IF;
-END;
-
-DELIMITER ;
+END//

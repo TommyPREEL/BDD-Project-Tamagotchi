@@ -1,3 +1,4 @@
+DELIMITER //
 CREATE PROCEDURE update_tamagotchi_stats(IN tamagotchi_id TINYINT UNSIGNED,
                                          IN new_hungry TINYINT,
                                          IN new_drink TINYINT,
@@ -31,4 +32,4 @@ BEGIN
       sleep   = if(db_current_sleep > 100, 100, if(db_current_sleep < 0, 0, db_current_sleep)),
       boredom = if(db_current_boredom > 100, 100, if(db_current_boredom < 0, 0, db_current_boredom))
   WHERE id = tamagotchi_id;
-END;
+END//

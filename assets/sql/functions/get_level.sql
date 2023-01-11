@@ -1,3 +1,5 @@
+DELIMITER //
+
 CREATE FUNCTION get_level(id_tamagotchis TINYINT UNSIGNED)
   RETURNS TINYINT
   DETERMINISTIC
@@ -21,4 +23,4 @@ BEGIN
     RETURN round((nb_actions / 10) + 1);
   END IF;
 
-END;
+END//

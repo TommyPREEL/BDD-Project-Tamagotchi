@@ -10,6 +10,4 @@ BEGIN
   END IF;
 
   INSERT INTO users (username) VALUE (user);
-END;
-
-DELIMITER ;
+END//
