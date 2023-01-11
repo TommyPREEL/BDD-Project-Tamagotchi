@@ -43,3 +43,17 @@ CREATE TABLE IF NOT EXISTS deaths
   PRIMARY KEY (id),
   FOREIGN KEY (id_tamagotchis) REFERENCES tamagotchis (id)
 );
+
+CREATE TABLE IF NOT EXISTS historical_actions
+(
+  id_tamagotchis TINYINT UNSIGNED                       NOT NULL,
+  id             TINYINT UNSIGNED AUTO_INCREMENT        NOT NULL,
+  hungry         TINYINT                                NOT NULL,
+  drink          TINYINT                                NOT NULL,
+  sleep          TINYINT                                NOT NULL,
+  boredom        TINYINT                                NOT NULL,
+  action_type    ENUM ('eat', 'drink', 'sleep', 'play') NOT NULL,
+  creation_date  DATETIME                               NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_tamagotchis) REFERENCES tamagotchis (id)
+);
