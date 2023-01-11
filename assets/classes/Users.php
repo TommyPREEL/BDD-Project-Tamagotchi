@@ -34,9 +34,8 @@ class Users extends Database
     public static function createAccount(string $username)
     {
         $pdo = self::getDatabase();
-        $sql = "INSERT INTO %s (%s) VALUES('".$username."')";
-
-        $stmt = $pdo->prepare(sprintf($sql, static::$table, static::$columns[1]));
+        $sql = "CALL create_account('".$username."')";
+        $stmt = $pdo->prepare($sql);
 
         try
         {
