@@ -2,10 +2,14 @@
 session_start();
 require_once("../assets/include/head.php");
 require_once("../assets/classes/Tamagotchis.php");
+require_once("../assets/classes/AliveTamagotchis.php");
+require_once("../assets/classes/DeadTamagotchis.php");
 $_SESSION['tamagotchi_id'] = $_GET['tamagotchi_id'];
 
-$tamagotchi = Tamagotchis::getAllByTamagotchiId($_SESSION["user_id"], $_GET['tamagotchi_id']);
-if($tamagotchi['dead_date'] != null)
+$deadTamagotchi = DeadTamagotchis::getTamagotchiDead($_SESSION["user_id"],$_GET['tamagotchi_id']);
+$tamagotchi = AliveTamagotchis::getInfoTamagotchiById($_SESSION["user_id"], $_GET['tamagotchi_id']);
+
+if($deadTamagotchi != null)
 {
     header('Location: tamagotchis_list.php');
     exit();
@@ -24,7 +28,7 @@ if($tamagotchi['dead_date'] != null)
 
             <h6><a>Thirsty</a></h6>
             <div class="w3-light-grey">
-                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["thirsty"]?>%"><?= $tamagotchi["thirsty"]?>%</div>
+                <div id="myBar" class="w3-container w3-green w3-center" style="width:<?= $tamagotchi["drink"]?>%"><?= $tamagotchi["drink"]?>%</div>
             </div>
 
             <h6><a>Sleep</a></h6>

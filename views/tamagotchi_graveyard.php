@@ -2,8 +2,9 @@
 session_start();
 require_once("../assets/include/head.php");
 require_once("../assets/classes/Tamagotchis.php");
+require_once("../assets/classes/DeadTamagotchis.php");
 
-$tamagotchis = Tamagotchis::getAllDead($_SESSION["user_id"]);
+$tamagotchis = DeadTamagotchis::getAllDead($_SESSION["user_id"]);
 ?>
 
 <div class="d-flex flex-wrap align-items-start">
@@ -19,8 +20,8 @@ $tamagotchis = Tamagotchis::getAllDead($_SESSION["user_id"]);
           <div class="card-body">
             <h4 class="card-title font-weight-bold d-flex justify-content-center"><?php echo $tamagotchi['name']." (lv.".$tamagotchi['level'].")"?></h4>
             <span><h5>Creation Date : <?= $tamagotchi['creation_date'] ?></h5></span>
-            <span><h5>Dead Date : <?= $tamagotchi['dead_date'] ?></h5></span>
-            <span><h5>Death Reason : <?= $tamagotchi['death_reason'] ?></h5></span>
+            <span><h5>Dead Date : <?= $tamagotchi['death_date'] ?></h5></span>
+            <span><h5>Death Reason : <?= $tamagotchi['reason'] ?></h5></span>
           </div>
         </div>
     </section>
