@@ -2,9 +2,9 @@
 session_start();
 require_once("../assets/include/head.php");
 require_once("../assets/classes/Tamagotchis.php");
+require_once("../assets/classes/AliveTamagotchis.php");
 
 $tamagotchis = AliveTamagotchis::getAllByUserId($_SESSION["user_id"]);
-var_dump($tamagotchis);die('list ligne 7');
 ?>
 
 <a href="tamagotchi_create.php">
@@ -20,7 +20,7 @@ if($tamagotchis == null){
   <?php foreach($tamagotchis as $tamagotchi) { ?>
   <div class="container">
     <section class="mx-auto my-5">
-      <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['user_id'];?>" >
+      <a href="tamagotchi_profil.php?tamagotchi_id=<?=$tamagotchi['id'];?>" >
         <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               <img src="../assets/media/baby_yoda.png" class="img-fluid" />
