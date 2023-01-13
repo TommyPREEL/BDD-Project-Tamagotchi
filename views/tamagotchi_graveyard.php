@@ -5,8 +5,12 @@ require_once("../assets/classes/Tamagotchis.php");
 require_once("../assets/classes/DeadTamagotchis.php");
 
 $tamagotchis = DeadTamagotchis::getAllDead($_SESSION["user_id"]);
-?>
+if(count($tamagotchis) == 0)
+{
+  echo '<p class="d-flex justify-content-center">Aucun de vos Tamagotchis n\'est mort !</p>';
+}
 
+?>
 <div class="d-flex flex-wrap align-items-start">
 
 <?php foreach ($tamagotchis as $tamagotchi) { ?>
@@ -28,5 +32,4 @@ $tamagotchis = DeadTamagotchis::getAllDead($_SESSION["user_id"]);
   </div>
 <?php } ?>
 </div>
-
 <?php require("../assets/include/footer.php"); ?>

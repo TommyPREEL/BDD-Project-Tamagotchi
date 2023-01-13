@@ -5,7 +5,7 @@ require_once 'Database.php';
 class Tamagotchis extends Database
 {
     protected static string $table = "tamagotchis";
-    protected static array $columns = ["id_users","id","name","hungry","drink","sleep","boredom","creation_date"];	
+    protected static array $columns = ["id_users","id","name","creation_date"];	
 
     public static function create(int $id_user, string $name)
     {

@@ -115,11 +115,23 @@ h1 {
 }
 
 .img-tamagotchi{
-  max-width: 10%;
-  max-height: 10%;
+  max-width: 50px;
+  max-height: 50px;
   margin:10px;
+  vertical-align: middle;
 }
 
 .nav-bar{
   width:100%;
+  background-color: #e2e2e2 !important;
+  margin-bottom: 20px;
+}
+
+.error-form-create{
+  color:red;
+  font-weight: bold;
+}
+.auto{
+  width: auto;
+  height: auto;
 }
