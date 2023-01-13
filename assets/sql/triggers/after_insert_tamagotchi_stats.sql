@@ -1,3 +1,4 @@
+-- After create a tamagotchi, we create his stats (add a line into historical_actions)
 CREATE TRIGGER after_insert_tamagotchi_stats
   AFTER INSERT
   ON tamagotchis
