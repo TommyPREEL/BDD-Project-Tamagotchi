@@ -10,9 +10,10 @@ BEGIN
   DECLARE db_current_drink TINYINT;
   DECLARE db_current_sleep TINYINT;
   DECLARE db_current_boredom TINYINT;
+  DECLARE tamagotchi_level TINYINT;
 
-  SELECT hungry, drink, sleep, boredom
-  INTO db_current_hungry, db_current_drink, db_current_sleep, db_current_boredom
+  SELECT hungry, drink, sleep, boredom, get_level(tamagotchi_id)
+  INTO db_current_hungry, db_current_drink, db_current_sleep, db_current_boredom, tamagotchi_level
   FROM tamagotchis
          JOIN historical_actions ha on tamagotchis.id = ha.id_tamagotchis
   WHERE tamagotchis.id = tamagotchi_id
@@ -33,6 +34,14 @@ BEGIN
     SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT =
         'Bad Request, The current tamagotchi already have a stats to 0 (already dead)';
   END IF;
+
+  SET tamagotchi_level = tamagotchi_level - 1;
+
+  -- Add tamagotchi level to the stats to add
+  SET new_hungry = if(new_hungry < 0, new_hungry - tamagotchi_level, new_hungry + tamagotchi_level);
+  SET new_drink = if(new_drink < 0, new_drink - tamagotchi_level, new_drink + tamagotchi_level);
+  SET new_sleep = if(new_sleep < 0, new_sleep - tamagotchi_level, new_sleep + tamagotchi_level);
+  SET new_boredom = if(new_boredom < 0, new_boredom - tamagotchi_level, new_boredom + tamagotchi_level);
 
   -- If the update of the statistic gives a result lower than 0, then we force its value to 0
   SET db_current_hungry = if(db_current_hungry + new_hungry < 0, 0, db_current_hungry + new_hungry);
