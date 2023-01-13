@@ -1,5 +1,6 @@
 DELIMITER //
 
+-- Get stat of tamagotchi
 CREATE FUNCTION get_stats(
   id_tamagotchi TINYINT UNSIGNED,
   stats_name ENUM ('hungry', 'drink', 'sleep', 'boredom')

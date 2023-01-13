@@ -1,4 +1,6 @@
 DELIMITER //
+-- After a insert into historical_actions, we check if one of the tamagotchi statistics is equal to 0
+-- If is true, we call set_death procedure to kill the current tamagotchi
 CREATE TRIGGER after_update_tamagotchi_stats
   AFTER INSERT
   ON historical_actions

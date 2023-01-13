@@ -1,4 +1,5 @@
 DELIMITER //
+-- After a line was insert into action table, we update the stats of the current tamagotchi
 CREATE TRIGGER after_action_tamagotchi_stats
   AFTER INSERT
   ON actions

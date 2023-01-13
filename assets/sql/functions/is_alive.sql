@@ -1,11 +1,12 @@
 DELIMITER //
-
+-- Function to validate if the tamagotchi is alive, THANKS CAPTAIN OBVIOUS
 CREATE FUNCTION is_alive(id_tamagotchis TINYINT UNSIGNED)
   RETURNS BOOL
   DETERMINISTIC
 BEGIN
   DECLARE reason_death VARCHAR(50);
   DECLARE tamagotchi_name VARCHAR(50);
+
   SELECT deaths.reason, tamagotchis.name
   INTO reason_death, tamagotchi_name
   FROM tamagotchis
