@@ -19,6 +19,16 @@ BEGIN
   ORDER BY ha.creation_date DESC
   LIMIT 1;
 
+  IF current_action_type = 'hungry' AND db_current_hungry >= 80 THEN
+    SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The hunger stat is already at or above 80';
+  ELSEIF current_action_type = 'drink' AND db_current_drink >= 80 THEN
+    SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The drink stat is already at or above 80';
+  ELSEIF current_action_type = 'sleep' AND db_current_sleep >= 80 THEN
+    SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The sleep stat is already at or above 80';
+  ELSEIF current_action_type = 'play' AND db_current_boredom >= 80 THEN
+    SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The boredom stat is already at or above 80';
+  END IF;
+
   IF db_current_hungry = 0 OR db_current_boredom = 0 OR db_current_sleep = 0 OR db_current_drink = 0 THEN
     SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT =
         'Bad Request, The current tamagotchi already have a stats to 0 (already dead)';
@@ -46,4 +56,5 @@ BEGIN
      db_current_boredom,
      current_action_type
       );
-END //
+END
+//
