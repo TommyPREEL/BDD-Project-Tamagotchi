@@ -21,29 +21,4 @@ require("../assets/include/head.php");
 </div>
 <p id="error" class="d-flex justify-content-center error-form-create"></p>
 
-<!-- <script type="text/javascript">
-  let form = document.getElementById("form_create");
-  let submitButton = form.querySelector("button[type=submit]");
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    if (checkField()) {
-        // Activer le bouton submit
-        submitButton.disabled = false;
-    } else {
-        // Désactiver le bouton submit
-        submitButton.disabled = true;
-    }
-});
-
- function checkField(){
-  // console.log(document.getElementById("name").value.trim())
-  if(document.getElementById("name").value.trim() == ""){
-    document.getElementById("error").innerHTML = "Enter a valid name";
-    return false
-  }else{
-    return true;
-  }
- }
-</script> -->
-
 <?php require("../assets/include/footer.php"); ?>

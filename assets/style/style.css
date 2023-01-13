@@ -1,7 +1,10 @@
+.btn-log:hover{
+  background-color: #0e1c36;
+  color:white;
+}
 .btn-color{
-    background-color: #0e1c36;
+  background-color: #19277e;
     color: #fff;
-    
 }
 .profile-image-pic{
     height: 200px;
@@ -123,7 +126,7 @@ h1 {
 
 .nav-bar{
   width:100%;
-  background-color: #e2e2e2 !important;
+  background-color:rgb(227, 228, 255)!important;
   margin-bottom: 20px;
 }
 
@@ -131,7 +134,16 @@ h1 {
   color:red;
   font-weight: bold;
 }
-.auto{
-  width: auto;
-  height: auto;
+
+.toggle-buttons{
+  margin-left:40px;
+  margin-bottom:10px;
+}
+
+.toggle-selected{
+  background-color:rgb(203, 204, 253);
+}
+
+.toggle:hover{
+  background-color:rgb(203, 204, 253);
 }

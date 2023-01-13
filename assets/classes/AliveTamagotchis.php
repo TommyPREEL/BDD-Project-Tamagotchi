@@ -64,7 +64,7 @@ class AliveTamagotchis extends Database
     public static function sleep(int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
-        $sql = "CALL sleep($id_tamagotchi)";
+        $sql = "CALL bedtime($id_tamagotchi)";
         $stmt = $pdo->prepare($sql);
     
         try
