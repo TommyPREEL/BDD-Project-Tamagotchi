@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 14 jan. 2023 à 15:52
+-- Généré le : sam. 14 jan. 2023 à 17:19
 -- Version du serveur : 5.7.36
 -- Version de PHP : 8.1.0
 
@@ -107,7 +107,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_tamagotchi_stats` (IN `tamag
   LIMIT 1;
 
   -- If one of the stars is equal to or greater than 80 then an error is returned to prevent the user from doing their action
-  IF current_action_type = 'hungry' AND db_current_hungry >= 80 THEN
+  IF current_action_type = 'eat' AND db_current_hungry >= 80 THEN
     SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The hunger stat is already at or above 80';
   ELSEIF current_action_type = 'drink' AND db_current_drink >= 80 THEN
     SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The drink stat is already at or above 80';
@@ -167,9 +167,8 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `get_level` (`id_tamagotchis` TINYINT
 -- On compte le nombre de ligne dans la table actions pour un tamagotchi donné
   SELECT COUNT(*)
   into nb_actions
-  FROM actions a
-         INNER JOIN tamagotchis t ON t.id = a.id_tamagotchis
-  WHERE id_tamagotchis = a.id_tamagotchis;
+  FROM historical_actions ha
+  WHERE ha.id_tamagotchis = id_tamagotchis;
 
 
 -- Si le nombre d'actions est inférieurs à 10 il est niveau 1
