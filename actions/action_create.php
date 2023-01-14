@@ -6,9 +6,13 @@ require_once(dirname (__FILE__) . '\..\assets\classes\Tamagotchis.php');
 // If the Tamagotchi name is empty
 if($_POST["name"] == "")
 {
+    // Create an error
+    $_SESSION["error"] = "The tamagotchi name is empty";
+
     // Redirect to the tamagotchi creation page
     header('Location: ../views/tamagotchi_create.php');
     exit();
+    
 }else
 {
     // If the Tamagotchi creation works

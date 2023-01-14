@@ -14,7 +14,10 @@ if(Users::connect($_POST["username"]))
 }else
 {
     // Empty the user_id variable session
-    $_SESSION["user_id"] = null;
+    unset($_SESSION["user_id"]);
+
+    // Create an error
+    $_SESSION["error"] = "Unknown user";
 
     // Redirect to the index page
     header('Location: ../index.php');

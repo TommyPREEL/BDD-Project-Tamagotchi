@@ -19,6 +19,7 @@ require("../assets/include/head.php");
     </div>
   </section>
 </div>
-<p id="error" class="d-flex justify-content-center error-form-create"></p>
-
-<?php require("../assets/include/footer.php"); ?>
+<?php
+require("../assets/include/error.php");
+require("../assets/include/footer.php"); 
+?>

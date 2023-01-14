@@ -1,4 +1,8 @@
-<?php require_once("./assets/include/head.php"); require_once 'vendor/autoload.php';?>
+<?php 
+session_start(); 
+require_once("./assets/include/head.php"); 
+require_once 'vendor/autoload.php';
+?>
   <div class="container-form">
     <div class="row">
       <div class="col-md-6 offset-md-3">
@@ -21,4 +25,7 @@
       </div>
     </div>
   </div>
-<?php require("./assets/include/footer.php"); ?>
+<?php
+require("assets/include/error.php");
+require("assets/include/footer.php");
+?>

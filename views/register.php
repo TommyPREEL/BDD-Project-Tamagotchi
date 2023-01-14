@@ -1,4 +1,7 @@
-<?php require("../assets/include/head.php"); ?>
+<?php 
+session_start(); 
+require("../assets/include/head.php"); 
+?>
 
 <div class="container-form">
   <div class="row">
@@ -29,4 +32,7 @@
   </div>
 </div>
 
-<?php require("../assets/include/footer.php"); ?>
+<?php
+require("../assets/include/error.php");
+require("../assets/include/footer.php"); 
+?>
