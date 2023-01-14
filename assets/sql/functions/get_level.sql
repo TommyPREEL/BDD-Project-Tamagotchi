@@ -11,7 +11,7 @@ BEGIN
   SELECT COUNT(*)
   into nb_actions
   FROM historical_actions ha
-  WHERE ha.id_tamagotchis = id_tamagotchis;
+  WHERE ha.id_tamagotchis = id_tamagotchis AND ha.action_type != 'created';
 
 
 -- Si le nombre d'actions est inférieurs à 10 il est niveau 1
