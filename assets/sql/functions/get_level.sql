@@ -19,7 +19,7 @@ BEGIN
     RETURN 1;
   ELSE
 -- Si il a plus de 10 actions alors on (divise par 10) + 1 pour le décalage. Round() afin d'arrondir.
-    RETURN round((nb_actions / 10) + 1);
+    RETURN FLOOR((nb_actions / 10) + 1);
   END IF;
 
 END//
