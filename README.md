@@ -64,5 +64,13 @@ php ./migration.php migrate // To progress from the actual migration to the last
 
 # Data sets 
 
-#### Import the file **assets/sql/mock.sql** if you want some data in your database.
+#### Import the file ***assets/sql/mock.sql*** if you want some data in your database.
+<br>
 
+# Documentation
+#### Available in the folder ***documentation***, then open the ***index.html***.
+
+#### Click on the tabs named ***Data Structures***, then click on all the dropdown menu with a ***N*** in a blue square to close subtitles.
+<br>
+
+#### All informations that you need about the classes are available in the dropdown menu with a ***C*** in a blue square.
