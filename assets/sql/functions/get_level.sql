@@ -10,9 +10,8 @@ BEGIN
 -- On compte le nombre de ligne dans la table actions pour un tamagotchi donné
   SELECT COUNT(*)
   into nb_actions
-  FROM actions a
-         INNER JOIN tamagotchis t ON t.id = a.id_tamagotchis
-  WHERE id_tamagotchis = a.id_tamagotchis;
+  FROM historical_actions ha
+  WHERE ha.id_tamagotchis = id_tamagotchis;
 
 
 -- Si le nombre d'actions est inférieurs à 10 il est niveau 1
