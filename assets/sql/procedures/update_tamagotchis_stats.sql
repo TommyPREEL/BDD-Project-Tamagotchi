@@ -22,7 +22,7 @@ BEGIN
   LIMIT 1;
 
   -- If one of the stars is equal to or greater than 80 then an error is returned to prevent the user from doing their action
-  IF current_action_type = 'hungry' AND db_current_hungry >= 80 THEN
+  IF current_action_type = 'eat' AND db_current_hungry >= 80 THEN
     SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The hunger stat is already at or above 80';
   ELSEIF current_action_type = 'drink' AND db_current_drink >= 80 THEN
     SIGNAL SQLSTATE '40004' SET MESSAGE_TEXT = 'The drink stat is already at or above 80';
