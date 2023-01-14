@@ -45,16 +45,33 @@ abstract class Database
                 "database" => $_ENV['DATABASE_NAME']
             ];
             // PDO instance creation
-            self::$pdo = new PDO(sprintf(
-                "%s:host=%s:%s;dbname=%s",
-                $config["engine"],
-                $config["host"],
-                $config["port"],
-                $config["database"]
-            ), $config["username"], $config["password"], [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
-            ]);
+            try {
+                self::$pdo = new PDO(sprintf(
+                    "%s:host=%s:%s;dbname=%s",
+                    $config["engine"],
+                    $config["host"],
+                    $config["port"],
+                    $config["database"]
+                ), $config["username"], $config["password"], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+                ]);
+            } catch (Exception $e){
+                
+                $config["database"] = "";
+
+                self::$pdo = new PDO(sprintf(
+                    "%s:host=%s:%s;dbname=%s",
+                    $config["engine"],
+                    $config["host"],
+                    $config["port"],
+                    $config["database"]
+                ), $config["username"], $config["password"], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+                ]);
+            }
+            
         }
         return self::$pdo;
     }
