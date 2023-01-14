@@ -1,5 +1,9 @@
 <?php 
 session_start(); 
+if(isset($_SESSION['user_id']))
+{
+  unset($_SESSION['user_id']);
+}
 require_once("./assets/include/head.php"); 
 require_once 'vendor/autoload.php';
 ?>
