@@ -4,11 +4,21 @@ require_once("./assets/classes/Database.php");
 require_once("./assets/classes/Column.php");
 require_once("./assets/classes/Table.php");
 
+/**
+ * Migration
+ */
 class Migration extends Database
 {
     protected static string $table = "migration";
     protected static array $columns = ["id_etape","type_etape","name_table"];
-    
+        
+    /**
+     * @see TableNotExist : if table not exist we create the table
+     *
+     * @param $database : mixed 
+     * @param $tables : mixed 
+     * @return void
+     */
     public static function TableNotExist(string $database, array $tables)
     {
         Database::createDatabaseIfNotExists($database);
@@ -18,14 +28,24 @@ class Migration extends Database
             Database::migrate($database, $tables);
         }
     }
-
+    
+    /**
+     * @see getLast : return last row 
+     *
+     * @return void
+     */
     public static function getLast(){
         $pdo = self::getDatabase();
         $stmt = $pdo->prepare("SELECT * FROM " . static::$table . " ORDER BY id DESC LIMIT 1");
         $stmt->execute();
         return $stmt->fetch();
     }
-
+    
+    /**
+     * @see save
+     *
+     * @return void
+     */
     public function save() : void
     {
         $pdo = self::getDatabase();
@@ -51,6 +71,15 @@ class Migration extends Database
     }
 }
 
+
+/**
+ * @see arguments() : Function that allows you to go to the next or previous table, 
+ * it also allows you to reset the base or import everything at once 
+ *
+ * @param $args : mixed 
+ * @param $tables : mixed 
+ * @return void
+ */
 function arguments($args, $tables){
 
     // Table Migration
@@ -63,15 +92,19 @@ function arguments($args, $tables){
         new Column("execution_date", "datetime", "NOT NULL DEFAULT CURRENT_TIMESTAMP")]),
     ];
 
-    // Créer la table "migration" si elle n'existe pas
+    // Create Table "migration" if not exist
     try {
         Migration::TableNotExist("livecampus_project_bdd_tamagotchi", $migration);
     } catch (Exception $e) {}
     
     try {
 
+        // Return the last row of table migration
         $tableMigration = Migration::getLast();
+
+        // If table "migration" is empty we create the first row
         if (empty($tableMigration)){
+
             $mode = array(current($tables));
             $migration = new Migration();
             $migration->id_etape = 1;
@@ -79,6 +112,7 @@ function arguments($args, $tables){
             $migration->name_table = $mode[0]->name;
             $migration->save();
             Database::migrate("livecampus_project_bdd_tamagotchi",$mode);
+
         } else {
 
             if ($args == "next") {
@@ -143,6 +177,7 @@ function arguments($args, $tables){
     } catch (Exception $e) {}
 }
 
+// Array contains Tables of livecampus_project_bdd_tamagotchi
 $tables = [
     new Table("actions", "id", [
         new Column("id", "tinyint unsigned", "not null auto_increment"),
@@ -193,4 +228,5 @@ $tables = [
     ),
 ];
 
+// Execute function arguments()
 print_r(arguments($argv[1],$tables));
