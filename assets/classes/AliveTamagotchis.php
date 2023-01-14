@@ -1,11 +1,24 @@
 <?php 
 require_once 'Database.php';
 
+/**
+ * AliveTamagotchis class
+ * $table : the name of the table in the database
+ * $columns : the table of the columns in the table
+ */
 class AliveTamagotchis extends Database
 {
+    /**
+     * Inputs 
+     */
     protected static string $table = "alive_tamagotchis";
     protected static array $columns = ["user_id","id","name","hungry","drink","sleep","boredom","level"];	
 
+    /**
+     * @see getAllByUserId() : select the data depending of the user_id
+     * @param $id_user : string : the user ID
+     * @return The results
+     */
     public static function getAllByUserId(int $id_user)
     {
         $pdo = self::getDatabase();
@@ -16,6 +29,12 @@ class AliveTamagotchis extends Database
         return $stmt->fetchAll();
     }
 
+    /**
+     * @see getInfoTamagotchiById() : select the data depending of the user_id and tamagotchi_id
+     * @param $id_user : string : the user ID
+     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @return The results
+     */
     public static function getInfoTamagotchiById(int $id_user, int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
@@ -28,6 +47,11 @@ class AliveTamagotchis extends Database
         return $stmt->fetch();
     }
 
+    /**
+     * @see eat() : call the procedure eat in SQL 
+     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @return A boolean
+     */
     public static function eat(int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
@@ -44,7 +68,11 @@ class AliveTamagotchis extends Database
         }
     }
     
-
+    /**
+     * @see drink() : call the procedure drink in SQL 
+     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @return A boolean
+     */
     public static function drink(int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
@@ -61,6 +89,11 @@ class AliveTamagotchis extends Database
         }
     }
 
+    /**
+     * @see sleep() : call the procedure bedtime in SQL 
+     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @return A boolean
+     */
     public static function sleep(int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
@@ -77,6 +110,11 @@ class AliveTamagotchis extends Database
         }
     }
 
+    /**
+     * @see play() : call the procedure enjoy in SQL 
+     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @return A boolean
+     */
     public static function play(int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
