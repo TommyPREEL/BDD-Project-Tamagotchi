@@ -1,4 +1,4 @@
-# Exemple des méthodes à appliquer dans PHP
+# Methods to apply in PHP
 
 ## create_account
 
@@ -63,9 +63,9 @@ CALL drink(1)
 CALL enjoy(1)
 ```
 
-## Vues
+## Views
 
-Les vues à appelé pour géré l'affichage des tamagotchis
+Views to use to manage the displaying of tamagotchis
 
 ### Alive Tamagotchi
 
