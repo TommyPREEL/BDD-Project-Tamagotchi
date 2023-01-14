@@ -1,13 +1,11 @@
 # | BDD Project Tamagotchi
 
 ### Revive your childhood by playing with Tamagotchis !
-<br>
 
 # Requirements
 
 #### MYSQL version : 8
 #### PHP version : 8.0.13
-<br>
 
 # Getting started
 
@@ -29,16 +27,13 @@ composer install
 ## Import the database
 
 #### You need a local server with Apache, severals solutions are available on [Windows](https://www.wampserver.com/) and [Mac](https://www.mamp.info/en/downloads/).
-<br>
 
 #### Now, you have **two ways** to create the database.
 ***(PRIORITIZE THE FIRST WAY: the second is in development)***
-<br>
 
 - 1 - Import the SQL dump
 
 #### Open your local server, open your database manager then import the script **dump.sql** (available in this folder).
-<br>
 
 - 2 - By commands
 
@@ -51,26 +46,21 @@ php ./migration.php reset // To cancel all migrations
 php ./migration.php migrate // To progress from the actual migration to the last migration
 ```
 #### Now, you have to import manually the procedures, the functions, the triggers and the views
-<br>
 
 ## Configure the environment
 
 #### In the .env file, you have to change the credentials access to your database.
-<br>
 
 ## Start the project
 #### Open your navigator, type your local server address, open the project and enjoy !
-<br>
 
 # Data sets 
 
 #### Import the file ***assets/sql/mock.sql*** if you want some data in your database.
-<br>
 
 # Documentation
 #### Available in the folder ***documentation***, then open the ***index.html***.
 
 #### Click on the tabs named ***Data Structures***, then click on all the dropdown menu with a ***N*** in a blue square to close subtitles.
-<br>
 
 #### All informations that you need about the classes are available in the dropdown menu with a ***C*** in a blue square.
