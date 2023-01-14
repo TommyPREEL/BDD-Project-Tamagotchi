@@ -15,7 +15,7 @@ BEGIN
 
 
 -- Si le nombre d'actions est inférieurs à 10 il est niveau 1
-  IF nb_actions <= 10 THEN
+  IF nb_actions < 10 THEN
     RETURN 1;
   ELSE
 -- Si il a plus de 10 actions alors on (divise par 10) + 1 pour le décalage. Round() afin d'arrondir.

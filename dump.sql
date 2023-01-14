@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 14 jan. 2023 à 17:19
+-- Généré le : sam. 14 jan. 2023 à 17:55
 -- Version du serveur : 5.7.36
 -- Version de PHP : 8.1.0
 
@@ -168,15 +168,15 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `get_level` (`id_tamagotchis` TINYINT
   SELECT COUNT(*)
   into nb_actions
   FROM historical_actions ha
-  WHERE ha.id_tamagotchis = id_tamagotchis;
+  WHERE ha.id_tamagotchis = id_tamagotchis AND ha.action_type != 'created';
 
 
 -- Si le nombre d'actions est inférieurs à 10 il est niveau 1
-  IF nb_actions <= 10 THEN
+  IF nb_actions < 10 THEN
     RETURN 1;
   ELSE
 -- Si il a plus de 10 actions alors on (divise par 10) + 1 pour le décalage. Round() afin d'arrondir.
-    RETURN round((nb_actions / 10) + 1);
+    RETURN FLOOR((nb_actions / 10) + 1);
   END IF;
 
 END$$
