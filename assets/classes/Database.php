@@ -1,44 +1,57 @@
 <?php
+require_once 'vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$database_host = $_ENV['DATABASE_HOST'];
+$database_port = $_ENV['DATABASE_PORT'];
+$database_name = $_ENV['DATABASE_NAME'];
+$database_user = $_ENV['DATABASE_USER'];
+$database_engine = $_ENV['DATABASE_ENGINE'];
+$database_password = $_ENV['DATABASE_PASSWORD'];
+
+/**
+ * Database class
+ * $table : the table name in the database
+ * $columns : the columns name in the table 
+ */
 abstract class Database
 {
     /**
-     * Le nom de la table
+     * The table name
      */
     protected static string $table = "";
     /**
-     * La colonne contenant la clef primaire
-     * Attention : cela n'est pas compatible avec des clefs composites
+     * The primary key
      */
     protected static string $id = "";
     /**
-     * La liste des colonnes de la table (incluant la clef primaire)
+     * The columns list
      */
     protected static array $columns = [];
 
     /**
-     * Singleton de connexion à la base de données
-     * Un singleton ne sera instancié qu'une fois dans toute l'application
+     * Database connection singleton 
      */
     private static ?PDO $pdo = null;
 
     /**
-     * Méthode permettant de récupérer (et si nécessaire d'instancier) une connexion à la BDD
+     * Connection to the database
      */
     public static function getDatabase()
     {
         if(!self::$pdo) {
-            // TODO Récupérer ces informations d'un fichier .env (ou plus généralement de configuration)
+            // Update the .env for configure your connection
             $config = [
-                "host" => "localhost",
-                "port" => 3306,
-                "username" => "root",
-                "password" => "",
-                "engine" => "mysql",
-                "database" => "livecampus_project_bdd_tamagotchi"
+                "host" => $database_host,
+                "port" => $database_port,
+                "username" => $database_user,
+                "password" => $database_password,
+                "engine" => $database_engine,
+                "database" => $database_name
             ];
-            // Création d'une instance PDO
-            // Utilisation de sprintf : https://php.net/sprintf
+            // PDO instance creation
             self::$pdo = new PDO(sprintf(
                 "%s:host=%s:%s;dbname=%s",
                 $config["engine"],
@@ -46,7 +59,6 @@ abstract class Database
                 $config["port"],
                 $config["database"]
             ), $config["username"], $config["password"], [
-                // https://www.php.net/manual/fr/pdo.constants.php
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
             ]);
@@ -55,7 +67,8 @@ abstract class Database
     }
 
     /**
-     * Récupère l'ensemble des lignes d'une table
+     * @see all() : Select all data in a table 
+     * @return The results
      */
     public static function all() : array
     {
@@ -66,7 +79,9 @@ abstract class Database
     }
 
     /**
-     * Récupère une ligne d'une table en fonction d'un id numérique
+     * @see find() : Select data in a table depending of the id entered
+     * @param $id : int : An ID
+     * @return The results
      */
     public static function find(int $id) : ?static
     {
@@ -78,6 +93,6 @@ abstract class Database
         return $stmt->fetch();
     }
 
-    // Pour retirer les erreurs de VSCode
+    // To delete VSCode errors
     public function __set($k, $v) { $this->$k = $v; }
 }

@@ -3,20 +3,24 @@ require_once 'Database.php';
 
 /**
  * AliveTamagotchis class
- * $table : the name of the table in the database
- * $columns : the table of the columns in the table
+ * $table : The table name in the database
+ * $columns : The columns in the table
  */
 class AliveTamagotchis extends Database
 {
     /**
-     * Inputs 
+     * The table name
      */
     protected static string $table = "alive_tamagotchis";
+
+    /**
+     * The columns list
+     */
     protected static array $columns = ["user_id","id","name","hungry","drink","sleep","boredom","level"];	
 
     /**
-     * @see getAllByUserId() : select the data depending of the user_id
-     * @param $id_user : string : the user ID
+     * @see getAllByUserId() : Select the data depending of the user_id
+     * @param $id_user : int : User ID
      * @return The results
      */
     public static function getAllByUserId(int $id_user)
@@ -30,16 +34,15 @@ class AliveTamagotchis extends Database
     }
 
     /**
-     * @see getInfoTamagotchiById() : select the data depending of the user_id and tamagotchi_id
-     * @param $id_user : string : the user ID
-     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @see getInfoTamagotchiById() : Select the data depending of the user_id and tamagotchi_id
+     * @param $id_user : int : User ID
+     * @param $id_tamagotchi : int : Tamagotchi ID
      * @return The results
      */
     public static function getInfoTamagotchiById(int $id_user, int $id_tamagotchi)
     {
         $pdo = self::getDatabase();
         $sql = "SELECT * FROM %s WHERE %s = :id_user AND %s = :id";
-
         $stmt = $pdo->prepare(sprintf($sql, static::$table, static::$columns[0], static::$columns[1]));
         $stmt->bindValue("id_user", $id_user);
         $stmt->bindValue("id", $id_tamagotchi);
@@ -48,8 +51,8 @@ class AliveTamagotchis extends Database
     }
 
     /**
-     * @see eat() : call the procedure eat in SQL 
-     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @see eat() : Call the procedure eat() in SQL 
+     * @param $id_tamagotchi : int : the tamagotchi ID
      * @return A boolean
      */
     public static function eat(int $id_tamagotchi)
@@ -69,8 +72,8 @@ class AliveTamagotchis extends Database
     }
     
     /**
-     * @see drink() : call the procedure drink in SQL 
-     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @see drink() : call the procedure drink() in SQL 
+     * @param $id_tamagotchi : int : the tamagotchi ID
      * @return A boolean
      */
     public static function drink(int $id_tamagotchi)
@@ -90,8 +93,8 @@ class AliveTamagotchis extends Database
     }
 
     /**
-     * @see sleep() : call the procedure bedtime in SQL 
-     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @see sleep() : call the procedure bedtime() in SQL 
+     * @param $id_tamagotchi : int : the tamagotchi ID
      * @return A boolean
      */
     public static function sleep(int $id_tamagotchi)
@@ -111,8 +114,8 @@ class AliveTamagotchis extends Database
     }
 
     /**
-     * @see play() : call the procedure enjoy in SQL 
-     * @param $id_tamagotchi : string : the tamagotchi ID
+     * @see play() : call the procedure enjoy() in SQL 
+     * @param $id_tamagotchi : int : the tamagotchi ID
      * @return A boolean
      */
     public static function play(int $id_tamagotchi)

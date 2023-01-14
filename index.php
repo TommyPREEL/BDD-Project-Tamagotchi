@@ -1,4 +1,4 @@
-<?php require_once("./assets/include/head.php") ?>
+<?php require_once("./assets/include/head.php"); require_once 'vendor/autoload.php';?>
   <div class="container-form">
     <div class="row">
       <div class="col-md-6 offset-md-3">
