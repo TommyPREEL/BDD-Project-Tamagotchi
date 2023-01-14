@@ -1,15 +1,8 @@
 <?php
-require_once 'vendor/autoload.php';
+require_once(dirname (__FILE__) ."\..\..\\vendor\autoload.php");
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(dirname (__FILE__) ."\..\..\\");
 $dotenv->load();
-
-$database_host = $_ENV['DATABASE_HOST'];
-$database_port = $_ENV['DATABASE_PORT'];
-$database_name = $_ENV['DATABASE_NAME'];
-$database_user = $_ENV['DATABASE_USER'];
-$database_engine = $_ENV['DATABASE_ENGINE'];
-$database_password = $_ENV['DATABASE_PASSWORD'];
 
 /**
  * Database class
@@ -44,12 +37,12 @@ abstract class Database
         if(!self::$pdo) {
             // Update the .env for configure your connection
             $config = [
-                "host" => $database_host,
-                "port" => $database_port,
-                "username" => $database_user,
-                "password" => $database_password,
-                "engine" => $database_engine,
-                "database" => $database_name
+                "host" => $_ENV['DATABASE_HOST'],
+                "port" => $_ENV['DATABASE_PORT'],
+                "username" => $_ENV['DATABASE_USER'],
+                "password" => $_ENV['DATABASE_PASSWORD'],
+                "engine" => $_ENV['DATABASE_ENGINE'],
+                "database" => $_ENV['DATABASE_NAME']
             ];
             // PDO instance creation
             self::$pdo = new PDO(sprintf(

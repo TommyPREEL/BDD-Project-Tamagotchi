@@ -1,7 +1,7 @@
 <?php
 require_once 'vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable('');
 $dotenv->load();
 
 $database_host = $_ENV['DATABASE_HOST'];
@@ -11,9 +11,27 @@ $database_user = $_ENV['DATABASE_USER'];
 $database_engine = $_ENV['DATABASE_ENGINE'];
 $database_password = $_ENV['DATABASE_PASSWORD'];
 
-print_r($database_host);
-print_r($database_port);
-print_r($database_name);
-print_r($database_user);
-print_r($database_engine);
-print_r($database_password);
+$config = [
+    "host" => $database_host,
+    "port" => $database_port,
+    "username" => $database_user,
+    "password" => $database_password,
+    "engine" => $database_engine,
+    "database" => $database_name
+];
+// PDO instance creation
+$pdo = new PDO(sprintf(
+    "%s:host=%s:%s;dbname=%s",
+    $config["engine"],
+    $config["host"],
+    $config["port"],
+    $config["database"]
+), $config["username"], $config["password"], [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+]);
+
+$sql = "SELECT * FROM users";
+$stmt = $pdo->prepare(sprintf($sql));
+$stmt->execute();
+print_r($stmt->fetchAll());
